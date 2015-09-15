@@ -42,7 +42,7 @@ void* recibir()
 	
 			else
 
-				printf("\n%s\n",buffer);
+				printf("\nMensage: %s\n",buffer);
 
 	}	
 }
@@ -64,9 +64,11 @@ int ss;
 printf("\nEnvio listo: %d\n", ss);
 	printf("socket: %d\n", ss);
 	
-	inet_aton("8.9.0.120", &addr);
+	//inet_aton("8.9.0.120", &addr);
+inet_aton(argv,&addr);
+
 	
-//printf("Chat con %s\n", addr);
+printf("Chat con %s\n", argv);
 	sa.sa_family = AF_INET;
 	memcpy(&sa.sa_data, &addr, 4);
 soo.sin_family = AF_INET;
@@ -94,7 +96,7 @@ int main(int argc, char ** argv){
     if (t1 != 0)
 	printf("\ncan't create thread :[%s]", strerror(t1));
 
-  t2 = pthread_create(&envia, NULL, &enviar, &argv[1]);
+  t2 = pthread_create(&envia, NULL, &enviar, argv[1]);
  if (t2 != 0)
 	printf("\ncan't create thread :[%s]", strerror(t1));
 			
