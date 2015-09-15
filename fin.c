@@ -61,10 +61,12 @@ int ss;
 	unsigned char ip[3];	
 	
 	ss = socket(AF_INET, SOCK_DGRAM, 0);
-	printf("socket: %d", ss);
+printf("\nEnvio listo: %d\n", ss);
+	printf("socket: %d\n", ss);
 	
-	inet_aton(argv, &addr);
+	inet_aton("8.9.0.120", &addr);
 	
+//printf("Chat con %s\n", addr);
 	sa.sa_family = AF_INET;
 	memcpy(&sa.sa_data, &addr, 4);
 soo.sin_family = AF_INET;
@@ -73,7 +75,7 @@ soo.sin_family = AF_INET;
 
 while(1){
 	printf(">>> ");
-	fgets(stdin, "%s", msg);
+scanf("%s",msg);
 int nu = sendto(ss, msg, sizeof(msg), 0, (struct sockaddr *)&soo, sizeof(soo));
 	strerror(nu);
 	
@@ -93,6 +95,8 @@ int main(int argc, char ** argv){
 	printf("\ncan't create thread :[%s]", strerror(t1));
 
   t2 = pthread_create(&envia, NULL, &enviar, &argv[1]);
+ if (t2 != 0)
+	printf("\ncan't create thread :[%s]", strerror(t1));
 			
 			
 			do
